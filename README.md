@@ -172,7 +172,7 @@ The dashboard automatically displays:
 
 <div align="center">
 
-"in the file screenshots"
+"in the screenshots file"
 
 Network Overview
 
