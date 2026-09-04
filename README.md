@@ -6,13 +6,14 @@
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![Streamlit](https://img.shields.io/badge/Streamlit-1.28+-red.svg)
-![Pandas](https://img.shields.io/badge/Pandas-2.0+-green.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)
+![SQLite](https://img.shields.io/badge/SQLite-3.0+-blue.svg)
 ![Plotly](https://img.shields.io/badge/Plotly-5.0+-purple.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-**A Professional Mobile Network Performance Analysis & Monitoring Dashboard**
+**A Complete Mobile Network Performance Analysis Platform**
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Dashboard](#-dashboard-screenshots) • [Contributing](#-contributing)
+[Features](#-features) • [Architecture](#-system-architecture) • [Installation](#-installation) • [Usage](#-usage) • [Dashboard](#-dashboard-screenshots) • [Contributing](#-contributing)
 
 </div>
 
@@ -20,9 +21,14 @@
 
 ## 📖 Overview
 
-**Telecom Network Analyzer** is a comprehensive Python-based tool for analyzing mobile network performance metrics including RSRP, RSRQ, SINR, latency, and data speeds. The application provides an interactive dashboard with real-time visualizations, problem detection, and network health scoring.
+**Telecom Network Analyzer** is a complete end-to-end platform for collecting, storing, and analyzing mobile network performance data. The system consists of:
 
-> 🔥 **Goal**: Help network engineers and telecom professionals identify coverage issues and optimize network performance through data-driven insights.
+- **📱 Data Collection**: Mobile app (G-NetTrack) for collecting real network measurements
+- **🐍 Backend API**: FastAPI for receiving and storing data
+- **🗄️ Database**: SQLite for persistent storage
+- **📊 Dashboard**: Streamlit for visualization and analysis
+
+> 🔥 **Goal**: Provide telecom professionals and network engineers with a complete tool for network performance monitoring and analysis.
 
 ---
 
@@ -43,14 +49,47 @@
 
 ### 🗃️ Data Management
 - CSV file upload support
+- G-NetTrack TXT file support (auto-conversion)
 - Cell-level performance analysis
 - Export analysis results as CSV
 - Sample data included for testing
+- SQLite database for persistent storage
+
+### 🔌 API Integration
+- RESTful API with FastAPI
+- POST /measurements - Add new measurements
+- GET /measurements - Retrieve all measurements
+- Automatic database storage
 
 ### 🎯 Cell Performance
 - Per-cell statistics (samples, avg RSRP/SINR/speed/latency)
 - Problem count per cell
 - Identify best and worst performing cells
+
+---
+
+## 🏗️ System Architecture
+
+📱 G-NetTrack App (Mobile)
+↓ (TXT/CSV Export)
+📤 File Upload
+↓
+📊 Streamlit Dashboard
+↓ (Data Processing)
+🐍 TelecomAnalyzer (Python)
+↓ (Analysis Results)
+📊 Interactive Charts & Map
+
+----- OR -----
+
+📱 Mobile App / Postman
+↓ (HTTP POST)
+🐍 FastAPI Backend
+↓ (Save)
+🗄️ SQLite Database
+↓ (Read)
+📊 Streamlit Dashboard
+
 
 ---
 
@@ -60,6 +99,8 @@
 |------------|---------|
 | **Python 3.8+** | Core programming language |
 | **Streamlit** | Interactive web dashboard |
+| **FastAPI** | RESTful API backend |
+| **SQLite** | Lightweight database |
 | **Pandas** | Data processing and analysis |
 | **Plotly** | Interactive charts and visualizations |
 
@@ -68,40 +109,39 @@
 ## 📁 Project Structure
 
 TelecomNetworkAnalyzer/
-
-├── app.py              # Main dashboard application
-
+├── app.py              # Main Streamlit dashboard
 ├── analyzer.py         # Analysis engine (backend logic)
-
+├── main.py             # FastAPI backend
+├── db_helper.py        # Database helper functions
 ├── sample_data.csv     # Sample measurement data
-
 ├── requirements.txt    # Python dependencies
-
 ├── screenshots/        # Dashboard screenshots
-
 │   └── logo.png        # Project logo
-
 └── README.md          # Documentation
 
+`
 
 ---
 
 ## 📊 Input Data Format
 
-The application expects CSV files with the following columns:
+The application accepts CSV files with the following columns:
 
 | Column | Type | Description |
 |--------|------|-------------|
-| `timestamp` | datetime | Measurement time |
-| `cell_id` | int | Cell tower identifier |
-| `latitude` | float | GPS latitude |
-| `longitude` | float | GPS longitude |
-| `rsrp` | float | Reference Signal Received Power (dBm) |
-| `rsrq` | float | Reference Signal Received Quality (dB) |
-| `sinr` | float | Signal-to-Interference-plus-Noise Ratio (dB) |
-| `download_mbps` | float | Download speed in Mbps |
-| `upload_mbps` | float | Upload speed in Mbps |
-| `latency_ms` | float | Network latency in milliseconds |
+| timestamp | datetime | Measurement time |
+| cell_id | int | Cell tower identifier |
+| latitude | float | GPS latitude |
+| longitude | float | GPS longitude |
+| rsrp | float | Reference Signal Received Power (dBm) |
+| rsrq | float | Reference Signal Received Quality (dB) |
+| sinr | float | Signal-to-Interference-plus-Noise Ratio (dB) |
+| download_mbps | float | Download speed in Mbps |
+| upload_mbps | float | Upload speed in Mbps |
+| latency_ms | float | Network latency in milliseconds |
+
+### 📱 G-NetTrack Support
+The dashboard automatically converts G-NetTrack TXT exports to the required format.
 
 ---
 
@@ -113,43 +153,44 @@ The application expects CSV files with the following columns:
 
 ### Step 1: Clone the repository
 
-bash
-git clone https://github.com/KyrillosSaeed/TelecomNetworkAnalyzer.git
+git clone https://github.com/yourusername/TelecomNetworkAnalyzer.git
 cd TelecomNetworkAnalyzer
-
 Step 2: Install dependencies
 
-bash
 pip install -r requirements.txt
-
 Or install manually:
 
-bash
-pip install pandas streamlit plotly
+pip install pandas streamlit plotly fastapi uvicorn
+Step 3: Run the Dashboard
 
-Step 3: Run the application
-
-bash
 streamlit run app.py
-`
+Step 4: Run the API Server (Optional)
 
-Step 4: Open in browser
+python -m uvicorn main:app --reload
+Step 5: Open in browser
 
-The dashboard will open automatically at 
-Local URL: http://localhost:8501
-  Network URL: http://192.168.1.103:8501
+· Dashboard: http://localhost:8501
+· API: http://localhost:8000
+· API Docs: http://localhost:8000/docs
 
 ---
 
 🎯 Usage Guide
 
-1️⃣ Upload Data
+1️⃣ Collect Data (Mobile)
 
-· Click the Upload CSV button in the sidebar
-· Select your CSV file with the required columns
+· Install G-NetTrack Lite from Google Play
+· Grant location and phone permissions
+· Start logging measurements
+· Export as TXT file
+
+2️⃣ Upload Data
+
+· Click Upload CSV or TXT in the sidebar
+· Select your file (CSV or G-NetTrack TXT)
 · Or use the included sample_data.csv for testing
 
-2️⃣ Analyze Results
+3️⃣ Analyze Results
 
 The dashboard automatically displays:
 
@@ -157,22 +198,39 @@ The dashboard automatically displays:
 · Signal quality distribution charts
 · Time series trends for RSRP, SINR, Speed, and Latency
 
-3️⃣ Explore Cell Performance
+4️⃣ Explore Cell Performance
 
 · View statistics for each cell tower
 · Identify problematic cells with high issue counts
 
-4️⃣ Export Results
+5️⃣ Export Results
 
 · Click Download CSV to save the analysis results
 
+6️⃣ API Usage (Optional)
+
+Send measurements via HTTP POST:
+
+curl -X POST http://localhost:8000/measurements \
+  -H "Content-Type: application/json" \
+  -d '{
+    "timestamp": "2026-09-04 15:30:00",
+    "network_type": "5G",
+    "cell_id": "205",
+    "rsrp": -72,
+    "rsrq": -8,
+    "sinr": 25,
+    "latitude": 30.0500,
+    "longitude": 31.2400,
+    "download_mbps": 120.5,
+    "upload_mbps": 35.2,
+    "latency_ms": 15
+  }'
 ---
 
 📸 Dashboard Screenshots
 
 <div align="center">
-
-"in the screenshots file"
 
 Network Overview
 
@@ -227,10 +285,19 @@ Best Cell: Cell 105 (Avg RSRP: -77.33, Avg SINR: 22.67)
 Worst Cell: Cell 104 (Avg RSRP: -111.67, Avg SINR: 4.33)
 ---
 
+🔌 API Endpoints
+
+Method Endpoint Description
+GET / API status
+POST /measurements Add new measurement
+GET /measurements Get all measurements
+GET /docs Swagger UI documentation
+
+---
+
 🤝 Contributing
 
 Contributions are welcome! Here's how you can help:
-
 1. Fork the repository
 2. Create a feature branch (git checkout -b feature/AmazingFeature)
 3. Commit your changes (git commit -m 'Add AmazingFeature')
@@ -249,15 +316,18 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Kyrillos Saeed
 
-https://linkedin.com/in/kyrillos-saeed
-https://sites.google.com/view/kyrillos-saeed
+https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+
 ---
 
 🙏 Acknowledgments
 
 · Streamlit for the amazing web framework
+· FastAPI for the powerful API framework
 · Pandas for powerful data processing
 · Plotly for interactive visualizations
+· G-NetTrack for mobile data collection
 
 ---
 
