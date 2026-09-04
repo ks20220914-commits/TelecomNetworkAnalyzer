@@ -71,23 +71,47 @@
 ## 🏗️ System Architecture
 
 📱 G-NetTrack App (Mobile)
-↓ (TXT/CSV Export)
+
+↓ 
+
+(TXT/CSV Export)
+
 📤 File Upload
+
 ↓
+
 📊 Streamlit Dashboard
-↓ (Data Processing)
+
+↓
+
+(Data Processing)
+
 🐍 TelecomAnalyzer (Python)
-↓ (Analysis Results)
+
+↓
+
+(Analysis Results)
+
 📊 Interactive Charts & Map
 
 ----- OR -----
 
 📱 Mobile App / Postman
-↓ (HTTP POST)
+
+↓
+
+(HTTP POST)
+
 🐍 FastAPI Backend
-↓ (Save)
+↓
+
+(Save)
+
 🗄️ SQLite Database
-↓ (Read)
+↓
+
+(Read)
+
 📊 Streamlit Dashboard
 
 
@@ -109,14 +133,23 @@
 ## 📁 Project Structure
 
 TelecomNetworkAnalyzer/
+
 ├── app.py              # Main Streamlit dashboard
-├── analyzer.py         # Analysis engine (backend logic)
+
+├── analyzer.py         # Analysis engine (backend logic
+
 ├── main.py             # FastAPI backend
+
 ├── db_helper.py        # Database helper functions
+
 ├── sample_data.csv     # Sample measurement data
+
 ├── requirements.txt    # Python dependencies
+
 ├── screenshots/        # Dashboard screenshots
+
 │   └── logo.png        # Project logo
+
 └── README.md          # Documentation
 
 `
@@ -212,23 +245,42 @@ The dashboard automatically displays:
 Send measurements via HTTP POST:
 
 curl -X POST http://localhost:8000/measurements \
-  -H "Content-Type: application/json" \
-  -d '{
+
+
+
+    -H"Content-Type: application/json" \
+  
+    -d'{
+  
     "timestamp": "2026-09-04 15:30:00",
+    
     "network_type": "5G",
+    
     "cell_id": "205",
+    
     "rsrp": -72,
+    
     "rsrq": -8,
+    
     "sinr": 25,
+    
     "latitude": 30.0500,
+    
     "longitude": 31.2400,
+    
     "download_mbps": 120.5,
+    
     "upload_mbps": 35.2,
+    
     "latency_ms": 15
-  }'
+    }'
+  
+  
 ---
 
 📸 Dashboard Screenshots
+
+"""in the screenshots file"""
 
 <div align="center">
 
@@ -281,8 +333,12 @@ Average RSRP: -92.5 dBm
 Average SINR: 14.1 dB
 Total Problems Detected: 6
 
+
 Best Cell: Cell 105 (Avg RSRP: -77.33, Avg SINR: 22.67)
+
+
 Worst Cell: Cell 104 (Avg RSRP: -111.67, Avg SINR: 4.33)
+
 ---
 
 🔌 API Endpoints
@@ -316,8 +372,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Kyrillos Saeed
 
-https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
-https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+https://linkedin.com/in/kyrillos-saeed
+
 
 ---
 
