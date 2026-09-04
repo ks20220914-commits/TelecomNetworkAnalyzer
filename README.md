@@ -114,7 +114,7 @@ The application expects CSV files with the following columns:
 ### Step 1: Clone the repository
 
 bash
-git clone https://github.com/Kyrillos Saeed/TelecomNetworkAnalyzer.git
+git clone https://github.com/KyrillosSaeed/TelecomNetworkAnalyzer.git
 cd TelecomNetworkAnalyzer
 
 Step 2: Install dependencies
@@ -249,9 +249,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 Kyrillos Saeed
 
-https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
-https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
-
+https://linkedin.com/in/kyrillos-saeed
+https://sites.google.com/view/kyrillos-saeed
 ---
 
 🙏 Acknowledgments
