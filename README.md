@@ -68,12 +68,19 @@
 ## 📁 Project Structure
 
 TelecomNetworkAnalyzer/
+
 ├── app.py              # Main dashboard application
+
 ├── analyzer.py         # Analysis engine (backend logic)
+
 ├── sample_data.csv     # Sample measurement data
+
 ├── requirements.txt    # Python dependencies
+
 ├── screenshots/        # Dashboard screenshots
+
 │   └── logo.png        # Project logo
+
 └── README.md          # Documentation
 
 
@@ -107,7 +114,7 @@ The application expects CSV files with the following columns:
 ### Step 1: Clone the repository
 
 bash
-git clone https://github.com/yourusername/TelecomNetworkAnalyzer.git
+git clone https://github.com/Kyrillos Saeed/TelecomNetworkAnalyzer.git
 cd TelecomNetworkAnalyzer
 
 Step 2: Install dependencies
@@ -128,7 +135,9 @@ streamlit run app.py
 
 Step 4: Open in browser
 
-The dashboard will open automatically at http://localhost:8501
+The dashboard will open automatically at 
+Local URL: http://localhost:8501
+  Network URL: http://192.168.1.103:8501
 
 ---
 
@@ -162,6 +171,8 @@ The dashboard automatically displays:
 📸 Dashboard Screenshots
 
 <div align="center">
+
+"in the file screenshots"
 
 Network Overview
 
