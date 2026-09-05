@@ -188,22 +188,25 @@ The dashboard automatically converts G-NetTrack TXT exports to the required form
 
 git clone https://github.com/yourusername/TelecomNetworkAnalyzer.git
 cd TelecomNetworkAnalyzer
-Step 2: Install dependencies
+
+### Step 2: Install dependencies
 
 pip install -r requirements.txt
 Or install manually:
 
 pip install pandas streamlit plotly fastapi uvicorn
-Step 3: Run the Dashboard
+### Step 3: Run the Dashboard
 
 streamlit run app.py
-Step 4: Run the API Server (Optional)
+### Step 4: Run the API Server (Optional)
 
 python -m uvicorn main:app --reload
-Step 5: Open in browser
+### Step 5: Open in browser
 
 · Dashboard: http://localhost:8501
+
 · API: http://localhost:8000
+
 · API Docs: http://localhost:8000/docs
 
 ---
