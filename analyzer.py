@@ -485,17 +485,20 @@ class TelecomAnalyzer:
         X, y = self.prepare_ml_data()
         if X is None or len(X) < 5:
             return None, None, None
-        
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, test_size=0.3, random_state=42, stratify=y
-        )
-        
+        try:
+            X_train, X_test, y_train, y_test = train_test_split(
+                X, y, test_size=0.3, random_state=42, stratify=y
+            )
+        except Exception as e:
+            print(f"Error during train-test split: {e}")
+            return None, None, None
+
         model = RandomForestClassifier(n_estimators=100, random_state=42)
         model.fit(X_train, y_train)
         
         y_pred = model.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
-        
+
         feature_importance = dict(zip(X.columns, model.feature_importances_.round(3)))
         
         return {
