@@ -1689,130 +1689,137 @@ else:
     st.info("ℹ️ No problems detected - root cause analysis not needed")
 
 # ==================== ML PREDICTION ====================
-st.subheader("🤖 ML Problem Prediction")
-
-# تدريب النموذج
-ml_result = analyzer.train_ml_model()
-
-if ml_result is not None and ml_result[0] is not None:
-    model = ml_result[0]
-    accuracy = ml_result[1]
-    feature_importance = ml_result[2]
-    X_test = ml_result[3]
-    y_test = ml_result[4]
-    n_samples = ml_result[6]
+# ==================== ML PREDICTION ====================
+try:
+    ml_result = analyzer.train_ml_model()
     
-    # توقع كل البيانات
-    prepared_data = analyzer.predict_all_problems(model)
-    ml_stats = analyzer.get_ml_statistics(model, X_test, y_test)
-    
-    st.success(f"✅ Model trained on {n_samples} samples (Accuracy: {accuracy}%)")
-    
-    # ML Performance Cards
-    col1, col2, col3, col4 = st.columns(4)
-    with col1:
-        st.metric("🎯 Accuracy", f"{ml_stats['accuracy']}%" if ml_stats else "N/A")
-    with col2:
-        st.metric("📊 Precision", f"{ml_stats['precision']}%" if ml_stats else "N/A")
-    with col3:
-        st.metric("📈 Recall", f"{ml_stats['recall']}%" if ml_stats else "N/A")
-    with col4:
-        st.metric("⭐ F1 Score", f"{ml_stats['f1_score']}%" if ml_stats else "N/A")
-    
-    st.markdown("---")
-    
-    # Feature Importance
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.write("📊 Feature Importance")
-        if feature_importance:
-            importance_df = pd.DataFrame({
-                'Feature': list(feature_importance.keys()),
-                'Importance': list(feature_importance.values())
-            }).sort_values('Importance', ascending=True)
+    if ml_result is not None and isinstance(ml_result, dict):
+        model = ml_result.get('model')
+        if model is not None:
+            accuracy = ml_result.get('accuracy', 0)
+            feature_importance = ml_result.get('feature_importance', {})
+            X_test = ml_result.get('X_test')
+            y_test = ml_result.get('y_test')
+            n_samples = ml_result.get('n_samples', 0)
             
-            fig = px.bar(
-                importance_df,
-                x='Importance',
-                y='Feature',
-                orientation='h',
-                title='What affects network problems most?'
-            )
-            st.plotly_chart(fig, width='stretch', key="ml_feature_importance")
-        else:
-            st.info("No feature importance data")
-    
-    with col2:
-        st.write("🔮 ML Predictions on Data")
-        if 'ml_result' in prepared_data.columns:
-            pred_counts = prepared_data['ml_result'].value_counts().reset_index()
-            pred_counts.columns = ['Result', 'Count']
+            # توقع كل البيانات
+            prepared_data = analyzer.predict_all_problems(model)
+            ml_stats = analyzer.get_ml_statistics(model, X_test, y_test)
             
-            fig = px.pie(
-                pred_counts,
-                values='Count',
-                names='Result',
-                title='ML Prediction Distribution',
-                color='Result',
-                color_discrete_map={
-                    '⚠️ Problem': 'red',
-                    '✅ Healthy': 'green'
-                }
-            )
-            st.plotly_chart(fig, width='stretch', key="ml_prediction_pie")
-        else:
-            st.info("No predictions available")
-    
-    st.markdown("---")
-    
-    # Predict New Data
-    st.subheader("🔮 Predict Single Measurement")
-    st.write("Enter measurement values to predict if there's a problem:")
-    
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        predict_rsrp = st.number_input("RSRP (dBm)", value=-90.0, step=0.5, key="predict_rsrp")
-        predict_sinr = st.number_input("SINR (dB)", value=15.0, step=0.5, key="predict_sinr")
-    with col2:
-        predict_download = st.number_input("Download (Mbps)", value=30.0, step=1.0, key="predict_download")
-        predict_upload = st.number_input("Upload (Mbps)", value=10.0, step=1.0, key="predict_upload")
-    with col3:
-        predict_latency = st.number_input("Latency (ms)", value=50.0, step=1.0, key="predict_latency")
-        predict_rsrq = st.number_input("RSRQ (dB)", value=-10.0, step=0.5, key="predict_rsrq")
-    
-    if st.button("🔮 Predict", key="predict_button"):
-        # عمل DataFrame للتنبؤ
-        predict_data = pd.DataFrame([{
-            'rsrp': predict_rsrp,
-            'rsrq': predict_rsrq,
-            'sinr': predict_sinr,
-            'download_mbps': predict_download,
-            'upload_mbps': predict_upload,
-            'latency_ms': predict_latency
-        }])
-        
-        # التنبؤ
-        temp_analyzer = TelecomAnalyzer(pd.concat([prepared_data, predict_data]))
-        temp_result = temp_analyzer.train_ml_model()
-        
-        if temp_result is not None and temp_result[0] is not None:
-            pred = temp_analyzer.predict_problem(predict_data.iloc[0], temp_result[0])
-            if pred:
-                if "Problem" in pred['prediction']:
-                    st.error(f"🚨 {pred['prediction']} (Confidence: {pred['confidence']}%)")
+            st.success(f"✅ Model trained on {n_samples} samples (Accuracy: {accuracy}%)")
+            
+            # ML Performance Cards
+            col1, col2, col3, col4 = st.columns(4)
+            with col1:
+                st.metric("🎯 Accuracy", f"{ml_stats['accuracy']}%" if ml_stats else "N/A")
+            with col2:
+                st.metric("📊 Precision", f"{ml_stats['precision']}%" if ml_stats else "N/A")
+            with col3:
+                st.metric("📈 Recall", f"{ml_stats['recall']}%" if ml_stats else "N/A")
+            with col4:
+                st.metric("⭐ F1 Score", f"{ml_stats['f1_score']}%" if ml_stats else "N/A")
+            
+            st.markdown("---")
+            
+            # Feature Importance
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.write("📊 Feature Importance")
+                if feature_importance:
+                    importance_df = pd.DataFrame({
+                        'Feature': list(feature_importance.keys()),
+                        'Importance': list(feature_importance.values())
+                    }).sort_values('Importance', ascending=True)
+                    
+                    fig = px.bar(
+                        importance_df,
+                        x='Importance',
+                        y='Feature',
+                        orientation='h',
+                        title='What affects network problems most?'
+                    )
+                    st.plotly_chart(fig, use_container_width=True, key="ml_feature_importance")
                 else:
-                    st.success(f"✅ {pred['prediction']} (Confidence: {pred['confidence']}%)")
+                    st.info("No feature importance data")
+            
+            with col2:
+                st.write("🔮 ML Predictions on Data")
+                if 'ml_result' in prepared_data.columns:
+                    pred_counts = prepared_data['ml_result'].value_counts().reset_index()
+                    pred_counts.columns = ['Result', 'Count']
+                    
+                    fig = px.pie(
+                        pred_counts,
+                        values='Count',
+                        names='Result',
+                        title='ML Prediction Distribution',
+                        color='Result',
+                        color_discrete_map={
+                            '⚠️ Problem': 'red',
+                            '✅ Healthy': 'green'
+                        }
+                    )
+                    st.plotly_chart(fig, use_container_width=True, key="ml_prediction_pie")
+                else:
+                    st.info("No predictions available")
+            
+            st.markdown("---")
+            
+            # Predict New Data
+            st.subheader("🔮 Predict Single Measurement")
+            st.write("Enter measurement values to predict if there's a problem:")
+            
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                predict_rsrp = st.number_input("RSRP (dBm)", value=-90.0, step=0.5, key="predict_rsrp")
+                predict_sinr = st.number_input("SINR (dB)", value=15.0, step=0.5, key="predict_sinr")
+            with col2:
+                predict_download = st.number_input("Download (Mbps)", value=30.0, step=1.0, key="predict_download")
+                predict_upload = st.number_input("Upload (Mbps)", value=10.0, step=1.0, key="predict_upload")
+            with col3:
+                predict_latency = st.number_input("Latency (ms)", value=50.0, step=1.0, key="predict_latency")
+                predict_rsrq = st.number_input("RSRQ (dB)", value=-10.0, step=0.5, key="predict_rsrq")
+            
+            if st.button("🔮 Predict", key="predict_button"):
+                predict_data = pd.DataFrame([{
+                    'rsrp': predict_rsrp,
+                    'rsrq': predict_rsrq,
+                    'sinr': predict_sinr,
+                    'download_mbps': predict_download,
+                    'upload_mbps': predict_upload,
+                    'latency_ms': predict_latency
+                }])
                 
-                st.write(f"Prediction Confidence: {pred['confidence']}%")
-            else:
-                st.warning("Could not make prediction")
+                temp_analyzer = TelecomAnalyzer(pd.concat([prepared_data, predict_data]))
+                temp_result = temp_analyzer.train_ml_model()
+                
+                if temp_result is not None and isinstance(temp_result, dict) and temp_result.get('model') is not None:
+                    pred = temp_analyzer.predict_problem(predict_data.iloc[0], temp_result['model'])
+                    if pred:
+                        if "Problem" in pred['prediction']:
+                            st.error(f"🚨 {pred['prediction']} (Confidence: {pred['confidence']}%)")
+                        else:
+                            st.success(f"✅ {pred['prediction']} (Confidence: {pred['confidence']}%)")
+                        st.write(f"Prediction Confidence: {pred['confidence']}%")
+                    else:
+                        st.warning("Could not make prediction")
+                else:
+                    st.warning("Could not train model for prediction")
         else:
-            st.warning("Could not train model for prediction")
+            st.warning("⚠️ Not enough data to train ML model (need at least 5 samples with both healthy and problem cases)")
+            st.info("ℹ️ The model needs data with both healthy and problematic measurements to learn patterns.")
+    else:
+        st.warning("⚠️ Not enough data to train ML model (need at least 5 samples with both healthy and problem cases)")
+        st.info("ℹ️ The model needs data with both healthy and problematic measurements to learn patterns.")
+        
+except Exception as e:
+    st.warning(f"⚠️ ML Prediction skipped: {e}")
+    st.info("ℹ️ Make sure you have at least 5 samples with both healthy and problematic measurements.")
 
-else:
-    st.warning("⚠️ Not enough data to train ML model (need at least 5 samples with both healthy and problem cases)")
-    st.info("ℹ️ The model needs data with both healthy and problematic measurements to learn patterns.")
+
+
+
 
 # ==================== COVERAGE GAPS ====================
 st.subheader("🗺️ Coverage Gaps Detection")
@@ -1889,19 +1896,19 @@ if gap_stats and gap_stats['has_gaps']:
     gap_data = pd.DataFrame()
     
     # Weak Signal
-    weak_signal = self.data[self.data['rsrp'] < -100]
+    weak_signal = prepared_data[prepared_data['rsrp'] < -100]
     if len(weak_signal) > 0:
         weak_signal['gap_type'] = 'Weak Signal'
         gap_data = pd.concat([gap_data, weak_signal])
     
     # No Coverage
-    no_coverage = self.data[self.data['rsrp'] < -120]
+    no_coverage = prepared_data[prepared_data['rsrp'] < -120]
     if len(no_coverage) > 0:
         no_coverage['gap_type'] = 'No Coverage'
         gap_data = pd.concat([gap_data, no_coverage])
     
     # Poor Quality
-    poor_quality = self.data[self.data['sinr'] < 5]
+    poor_quality = prepared_data[prepared_data['sinr'] < 5]
     if len(poor_quality) > 0:
         poor_quality['gap_type'] = 'Poor Quality'
         gap_data = pd.concat([gap_data, poor_quality])
