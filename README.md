@@ -283,6 +283,10 @@ python -m uvicorn main:app --reload
 · API: http://localhost:8000
 · API Docs: http://localhost:8000/docs
 
+### live demo
+
+https://telecomnetworkanalyzer-ckdrwt6i9tws6ncrqbd7qq.streamlit.app/
+
 ---
 
 🎯 Usage Guide
