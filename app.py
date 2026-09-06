@@ -580,17 +580,18 @@ rc_stats = analyzer.get_root_cause_statistics()
 # ==================== ML PREDICTION ====================
 ml_result = analyzer.train_ml_model()
 
-if ml_result is not None and ml_result[0] is not None:
-    model = ml_result[0]
-    accuracy = ml_result[1]
-    feature_importance = ml_result[2]
-    X_test = ml_result[3]
-    y_test = ml_result[4]
-    n_samples = ml_result[6]
+if ml_result is not None and isinstance(ml_result, dict) and ml_result.get("model") is not None:
+    model = ml_result["model"]
+    accuracy = ml_result["accuracy"]
+    feature_importance = ml_result["feature_importance"]
+    X_test = ml_result["X_test"]
+    y_test = ml_result["y_test"]
+    n_samples = ml_result["n_samples"]
     
     # توقع كل البيانات
     prepared_data = analyzer.predict_all_problems(model)
     ml_stats = analyzer.get_ml_statistics(model, X_test, y_test)
+    st.success(f"✅ ML Model trained on {n_samples} samples with accuracy: {accuracy:.1f}%")
 else:
     ml_stats = None
 
