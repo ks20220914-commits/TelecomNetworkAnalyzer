@@ -1,3 +1,7 @@
-pandas 
+pandas
 streamlit
 plotly
+fastapi
+uvicorn
+folium
+streamlit-folium
