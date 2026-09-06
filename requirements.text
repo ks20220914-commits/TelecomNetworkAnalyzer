@@ -3,13 +3,9 @@ streamlit
 plotly
 fastapi
 uvicorn
-sqlite3
 folium
 streamlit-folium
 scikit-learn
 reportlab
 openpyxl
 requests
-hashlib
-json
-os
