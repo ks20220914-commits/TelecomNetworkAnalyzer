@@ -495,7 +495,7 @@ class TelecomAnalyzer:
         
         y_pred = model.predict(X_test)
         accuracy = accuracy_score(y_test, y_pred)
-        feature_i
+        
         feature_importance = dict(zip(X.columns, model.feature_importances_.round(3)))
         
         return {
