@@ -73,35 +73,87 @@
 
 ## 🏗️ System Architecture
 
-┌─────────────────────────────────────────────────────────────────────────┐
-│                        Telecom Network Intelligence                    │ │                                                                         │
-│  ┌─────────────────────────────────────────────────────────────────┐   │
-│  │                        DATA COLLECTION                          │   │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐      │   │
-│  │  │ CSV File │  │ G-NetTrack│  │ URL Import│  │ FastAPI  │      │   │
-│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘      │   │
-│  └─────────────────────────────────────────────────────────────────┘   │
+┌────          ──────────────────────────────                     ───────────────────────────────────────┐
+
+
+│                            Telecom Network Intelligence                                                │                                                                          │
+
+
+│
+┌───────               ────────────────────────────────        ──────────────────────────┐               │
+
+│ 
+
+│                                   DATA COLLECTION                                    │                 │
+
+│
+
+│
+
+┌──────────┐           ┌──────────┐          ┌──────────┐        ┌──────────┐            │               │
+
+│    
+
+│
+
+
+│       CSV File │        │G-NetTrack│        │URL Import│          │ FastAPI  │          │             │
+
+│
+
+
+│     └──────────┘     └──────────┘      └──────────┘      └──────────┘               │                 │
+
+│
+
+
+└─────────────────────────────────────────────────────────────────┘    │
+
 │                                    ↓                                    │
-│  ┌─────────────────────────────────────────────────────────────────┐   │
-│  │                        DATA PROCESSING                          │   │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐      │   │
-│  │  │ Cleaning │  │ Analysis │  │   ML     │  │Forecasting│      │   │
-│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘      │   │
-│  └─────────────────────────────────────────────────────────────────┘   │
+
+│  ┌─────────────────────────────────────────────────────────────────┐    │
+
+
+│  │                        DATA PROCESSING                          │    │
+
+
+
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │    │
+
+│  │  │ Cleaning │  │ Analysis │  │   ML     │  │Forecastng│         │    │
+
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │    │
+
+│  └─────────────────────────────────────────────────────────────────┘    │
+
 │                                    ↓                                    │
-│  ┌─────────────────────────────────────────────────────────────────┐   │
-│  │                       VISUALIZATION                             │   │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐      │   │
-│  │  │ Dashboard│  │  Charts  │  │   Map    │  │ Reports  │      │   │
-│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘      │   │
-│  └─────────────────────────────────────────────────────────────────┘   │
+
+│  ┌─────────────────────────────────────────────────────────────────┐    │
+
+│  │                       VISUALIZATION                             │    │
+
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │    │
+
+│  │  │ Dashboard│  │  Charts  │  │   Map    │  │ Reports  │         │    │
+
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │    │
+
+│  └─────────────────────────────────────────────────────────────────┘    │
+
 │                                    ↓                                    │
-│  ┌─────────────────────────────────────────────────────────────────┐   │
-│  │                      INTELLIGENCE                              │   │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐      │   │
-│  │  │ Anomaly  │  │Root Cause│  │ Capacity │  │   Alerts │      │   │
-│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘      │   │
-│  └─────────────────────────────────────────────────────────────────┘   │
+
+│  ┌─────────────────────────────────────────────────────────────────┐    │
+
+│  │                      INTELLIGENCE                               │    │
+
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │    │
+
+│  │  │ Anomaly  │  │Root Cause│  │ Capacity │  │   Alerts │         │    │
+
+│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │    │
+
+│  └─────────────────────────────────────────────────────────────────┘    │
+
 └─────────────────────────────────────────────────────────────────────────┘
 
 
@@ -127,30 +179,53 @@
 ## 📁 Project Structure
 
 TelecomNetworkAnalyzer/
+
 ├── app.py                 # Main Streamlit Dashboard (36 features)
+
 ├── analyzer.py            # Analysis Engine (24 analytics functions)
+
 ├── main.py               # FastAPI Backend Server
+
 ├── db_helper.py          # SQLite Database Helper
+
 ├── telecom.db            # SQLite Database File
+
 ├── sample_data.csv       # Sample Measurement Data
+
 ├── users.json            # User Authentication Data
+
 ├── requirements.txt      # Python Dependencies
+
 ├── README.md            # Documentation
+
 ├── LICENSE              # MIT License
+
 └── screenshots/         # Dashboard Screenshots
+
 ├── logo.png         # Project Logo
+
 ├── overview.png     # Network Overview
+
 ├── signal_quality.png
+
 ├── rsrp_trend.png
+
 ├── sinr_trend.png
+
 ├── speed_analysis.png
+
 ├── latency_analysis.png
+
 ├── cell_performance.png
+
 ├── problems.png
+
 ├── map.png
+
 └── advanced_analytics.png
 
-`
+
+
 
 ---
 
@@ -259,6 +334,8 @@ The dashboard automatically displays:
 
 🏠 Network Overview
 
+"""in the screenshots file"""
+
 <img src="screenshots/overview.png" alt="Network Overview" width="800"/>
 
 📊 Signal Quality Charts
@@ -336,8 +413,9 @@ Kyrillos Saeed
 
 · Telecom Engineer | Data Science Enthusiast
 · Building tools that bridge Telecom Engineering and Data Science
-https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
-https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+https://ks20220914-commits.github.io/Kyrillos-Saeed.github.io/
+
+https://www.linkedin.com/in/kyrillos-saeed
 
 ---
 
