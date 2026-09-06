@@ -74,34 +74,86 @@
 ## 🏗️ System Architecture
 
 ┌─────────────────────────────────────────────────────────────────────────┐
-│  Telecom Network Intelligence                                           │                                                                          │
-│  ┌─────────────────────────────────────────────────────────────────┐    │
-│  │                        DATA COLLECTION                          │    │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │    │
-│  │  │ CSV File │  │G-NetTrack│  │URL Import│  │ FastAPI  │         │    │
-│  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │    │
-│  └─────────────────────────────────────────────────────────────────┘    │
+
+
+│ Telecom Network Intelligence                                            │                                                                          │
+
+
+│
+┌─────────────────────────────────────────────────────────────────┐       │
+
+│ 
+
+│                        DATA COLLECTION                          │       │
+
+│
+
+│
+
+┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐            │       │
+
+│    
+
+│
+
+
+│ CSV File │  │G-NetTrack│  │URL Import│  │ FastAPI     │         │       │
+
+│
+
+
+│  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │       │
+
+│
+
+
+└─────────────────────────────────────────────────────────────────┘    │
+
 │                                    ↓                                    │
+
 │  ┌─────────────────────────────────────────────────────────────────┐    │
+
+
 │  │                        DATA PROCESSING                          │    │
+
+
+
 │  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │    │
+
 │  │  │ Cleaning │  │ Analysis │  │   ML     │  │Forecastng│         │    │
+
 │  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │    │
+
 │  └─────────────────────────────────────────────────────────────────┘    │
+
 │                                    ↓                                    │
+
 │  ┌─────────────────────────────────────────────────────────────────┐    │
+
 │  │                       VISUALIZATION                             │    │
+
 │  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │    │
+
 │  │  │ Dashboard│  │  Charts  │  │   Map    │  │ Reports  │         │    │
+
 │  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │    │
+
 │  └─────────────────────────────────────────────────────────────────┘    │
+
 │                                    ↓                                    │
+
 │  ┌─────────────────────────────────────────────────────────────────┐    │
+
 │  │                      INTELLIGENCE                               │    │
+
 │  │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐         │    │
+
 │  │  │ Anomaly  │  │Root Cause│  │ Capacity │  │   Alerts │         │    │
+
 │  │  └──────────┘  └──────────┘  └──────────┘  └──────────┘         │    │
+
 │  └─────────────────────────────────────────────────────────────────┘    │
+
 └─────────────────────────────────────────────────────────────────────────┘
 
 
@@ -282,6 +334,8 @@ The dashboard automatically displays:
 
 🏠 Network Overview
 
+"""in the screenshots file"""
+
 <img src="screenshots/overview.png" alt="Network Overview" width="800"/>
 
 📊 Signal Quality Charts
@@ -359,9 +413,8 @@ Kyrillos Saeed
 
 · Telecom Engineer | Data Science Enthusiast
 · Building tools that bridge Telecom Engineering and Data Science
-https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
-https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
-
+https://ks20220914-commits.github.io/Kyrillos-Saeed.github.io/
+https://www.linkedin.com/in/kyrillos-saeed
 ---
 
 🙏 Acknowledgments
