@@ -283,6 +283,10 @@ python -m uvicorn main:app --reload
 · API: http://localhost:8000
 · API Docs: http://localhost:8000/docs
 
+### live demo
+
+https://telecomnetworkanalyzer-ckdrwt6i9tws6ncrqbd7qq.streamlit.app/
+
 ---
 
 🎯 Usage Guide
@@ -413,8 +417,6 @@ Kyrillos Saeed
 
 · Telecom Engineer | Data Science Enthusiast
 · Building tools that bridge Telecom Engineering and Data Science
-https://ks20220914-commits.github.io/Kyrillos-Saeed.github.io/
-
 https://www.linkedin.com/in/kyrillos-saeed
 
 ---
