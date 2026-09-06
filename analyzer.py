@@ -489,9 +489,10 @@ class TelecomAnalyzer:
             X_train, X_test, y_train, y_test = train_test_split(
                 X, y, test_size=0.3, random_state=42, stratify=y
             )
-        except Exception as e:
-            print(f"Error during train-test split: {e}")
-            return None, None, None
+        except ValueError:
+            X_train, X_test, y_train, y_test = train_test_split(
+                            X, y, test_size=0.3, random_state=42
+                        )
 
         model = RandomForestClassifier(n_estimators=100, random_state=42)
         model.fit(X_train, y_train)
