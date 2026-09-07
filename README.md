@@ -285,7 +285,7 @@ python -m uvicorn main:app --reload
 
 ### live demo
 
-https://telecomnetworkanalyzer-ckdrwt6i9tws6ncrqbd7qq.streamlit.app/
+https://telecomnetworkanalyzer-ypagedjjcw2tjtn5sprugm.streamlit.app/
 
 ---
 
