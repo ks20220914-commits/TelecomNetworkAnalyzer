@@ -1,11 +1,11 @@
 pandas
 streamlit
 plotly
-fastapi
-uvicorn
 folium
 streamlit-folium
 scikit-learn
 reportlab
 openpyxl
 requests
+fastapi
+uvicorn
