@@ -285,7 +285,7 @@ python -m uvicorn main:app --reload
 
 ### live demo
 
-https://telecomnetworkanalyzer-ckdrwt6i9tws6ncrqbd7qq.streamlit.app/
+https://telecomnetworkanalyzer-ypagedjjcw2tjtn5sprugm.streamlit.app/
 
 ---
 
@@ -294,40 +294,63 @@ https://telecomnetworkanalyzer-ckdrwt6i9tws6ncrqbd7qq.streamlit.app/
 1️⃣ Collect Data
 
 · Mobile App: Use G-NetTrack Lite to collect network measurements
+
 · Manual: Prepare CSV file with required columns
+
 · API: Send data via HTTP POST to FastAPI
 
 2️⃣ Upload Data
 
+
 · Upload CSV: Click "Upload CSV or TXT" in sidebar
+
 · Import URL: Enter CSV URL in sidebar
+
 · Use Sample: Built-in sample_data.csv
+
 
 3️⃣ Analyze
 
 The dashboard automatically displays:
 
 · Network Overview (Health Score, KPIs)
+
 · Signal Quality Charts
+
 · Time Series Trends
+
 · Cell Performance Table
+
 · Detected Problems
+
 · Coverage Heatmap
+
 · Advanced Analytics
+
 
 4️⃣ Explore Advanced Features
 
+
 · Filter Data: Use sidebar filters (date, cell, quality, etc.)
+
 · Compare Data: Compare periods or cells
+
 · Run Simulation: Test what-if scenarios
+
 · Generate Reports: PDF, Excel, CSV
+
 · Check Alerts: Custom threshold monitoring
+
 
 5️⃣ Export Results
 
+
 · 📥 Download CSV
+
 · 📥 Download Excel
+
 · 📥 Download PDF Report
+
 · 📥 Download Quality Report
 
 ---
